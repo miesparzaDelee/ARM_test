@@ -1,0 +1,19 @@
+------------------------------------------------------------------
+WIKI INFORMATION
+------------------------------------------------------------------
+> Module Info
+  Name : Analog Devices ADuCM350 Software
+  Project Key (eg AACDE-04): ADUCS-04
+  Release ID (eg 1.3.0) : 2.4.0.0
+  Repository Name (eg w0806120-SQE) : w1601112-stage
+  "'''Eval'''" Package Name :  
+  "'''Prod'''" Package Name :  ADuCM350_Software_GP-Rel2.4.0.0.exe
+  "'''Source'''" Package Name : 
+  Required Toolchains : IAR:7.30.1:EG:Warning
+------------------------------------------------------------------
+Reasons for packaging information
+------------------------------------------------------------------
+Adding SPItoFTDI example
+-------------------WARNINGS------------------
+WARNING: Removing Unused Valid Package Type: SRC because a zip file was not found or is invalid
+WARNING: Payload does not contain Getting Started Guide or Release Notes
