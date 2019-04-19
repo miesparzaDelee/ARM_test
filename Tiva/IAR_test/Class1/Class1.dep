@@ -30,7 +30,7 @@
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 10 2</file>
+                    <file> 2 10</file>
                 </tool>
             </outputs>
         </file>
@@ -76,10 +76,6 @@
                 </tool>
             </inputs>
         </file>
-        <forcedrebuild>
-            <name>[MULTI_TOOL]</name>
-            <tool>ILINK</tool>
-        </forcedrebuild>
     </configuration>
     <configuration>
         <name>Release</name>

@@ -96158,13 +96158,55 @@
     "scope": null
   },
   {
+    "ID": "c:main.c@58@macro@LED_RED",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "LED_RED",
+    "location": {
+      "column": "9",
+      "line": "4",
+      "path": "C:\\Users\\miesp\\Documents\\GitHub\\ARM_test\\Tiva\\IAR_test\\Class1\\main.c"
+    },
+    "name": "LED_RED",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:main.c@83@macro@LED_BLUE",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "LED_BLUE",
+    "location": {
+      "column": "9",
+      "line": "5",
+      "path": "C:\\Users\\miesp\\Documents\\GitHub\\ARM_test\\Tiva\\IAR_test\\Class1\\main.c"
+    },
+    "name": "LED_BLUE",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:main.c@109@macro@LED_GREEN",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "LED_GREEN",
+    "location": {
+      "column": "9",
+      "line": "6",
+      "path": "C:\\Users\\miesp\\Documents\\GitHub\\ARM_test\\Tiva\\IAR_test\\Class1\\main.c"
+    },
+    "name": "LED_GREEN",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
     "ID": "c:@F@main",
     "What": "Function",
     "defdec": "Def",
     "display": "int main(void)",
     "location": {
       "column": "5",
-      "line": "5",
+      "line": "8",
       "path": "C:\\Users\\miesp\\Documents\\GitHub\\ARM_test\\Tiva\\IAR_test\\Class1\\main.c"
     },
     "name": "main",
