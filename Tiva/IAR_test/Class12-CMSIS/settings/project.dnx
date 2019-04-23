@@ -11,20 +11,14 @@
         <LimitSize>0</LimitSize>
         <ByteLimit>50</ByteLimit>
     </Stack>
-    <Trace1>
-        <Enabled>0</Enabled>
-        <ShowSource>1</ShowSource>
-    </Trace1>
+    <LMIFTDIDriver>
+        <LMI_ResetMode>0x00000001</LMI_ResetMode>
+        <LMIFTDIserialNo>0E21756A</LMIFTDIserialNo>
+        <LMIFTDIfoundProbes />
+    </LMIFTDIDriver>
     <DebugChecksum>
-        <Checksum>2144541183</Checksum>
+        <Checksum>2696156507</Checksum>
     </DebugChecksum>
-    <CodeCoverage>
-        <Enabled>_ 0</Enabled>
-    </CodeCoverage>
-    <Disassembly>
-        <InstrCount>0</InstrCount>
-        <MixedMode>1</MixedMode>
-    </Disassembly>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
         <StopOnThrow>_ 0</StopOnThrow>
@@ -32,13 +26,36 @@
     <CallStack>
         <ShowArgs>0</ShowArgs>
     </CallStack>
+    <Disassembly>
+        <MixedMode>1</MixedMode>
+    </Disassembly>
+    <MemoryMap>
+        <Enabled>0</Enabled>
+        <Base>0</Base>
+        <UseAuto>0</UseAuto>
+        <TypeViolation>1</TypeViolation>
+        <UnspecRange>1</UnspecRange>
+        <ActionState>1</ActionState>
+    </MemoryMap>
+    <LMIFTDI>
+        <LMIFTDIserialNo>0E2006F4</LMIFTDIserialNo>
+        <LMIFTDIfoundProbes />
+    </LMIFTDI>
+    <watch_formats>
+        <Fmt0>{W}0:s32	4	0</Fmt0>
+    </watch_formats>
     <DriverProfiling>
         <Enabled>0</Enabled>
-        <Mode>1</Mode>
+        <Mode>0</Mode>
         <Graph>0</Graph>
         <Symbiont>0</Symbiont>
         <Exclusions />
     </DriverProfiling>
+    <Log_file>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </Log_file>
     <InterruptLog>
         <LogEnabled>0</LogEnabled>
         <GraphEnabled>0</GraphEnabled>
@@ -67,15 +84,17 @@
         <TypeViol>0</TypeViol>
         <Stop>1</Stop>
     </MemConfig>
+    <Trace1>
+        <Enabled>0</Enabled>
+        <ShowSource>1</ShowSource>
+    </Trace1>
     <Simulator>
         <Freq>10000000</Freq>
-        <FreqHi>0</FreqHi>
         <MultiCoreRunAll>1</MultiCoreRunAll>
     </Simulator>
-    <LMIFTDIDriver>
-        <LMIFTDIserialNo>0E21756A</LMIFTDIserialNo>
-        <LMIFTDIfoundProbes />
-    </LMIFTDIDriver>
+    <Disassemble_mode>
+        <mode>0</mode>
+    </Disassemble_mode>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -98,7 +117,8 @@
         <Count>0</Count>
     </Breakpoints>
     <Aliases>
-        <Count>0</Count>
+        <A0>_ "C:\embedded_programming\lesson12\delay.c" "C:\Users\miesp\Documents\GitHub\ARM_test\Tiva\IAR_test\Class12-CMSIS\delay.c"</A0>
+        <Count>1</Count>
         <SuppressDialog>0</SuppressDialog>
     </Aliases>
 </settings>

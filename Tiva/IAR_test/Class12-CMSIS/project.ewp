@@ -78,11 +78,11 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state>TM4C123GH6PM	TexasInstruments TM4C123GH6PM</state>
+                    <state>TM4C123FH6PM	TexasInstruments TM4C123FH6PM</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>GEndianModeBE</name>
@@ -121,11 +121,11 @@
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OGUseCmsisDspLib</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>GRuntimeLibThreads</name>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state>TM4C123GH6PM	TexasInstruments TM4C123GH6PM</state>
+                    <state>TM4C123FH6PM	TexasInstruments TM4C123FH6PM</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -317,7 +317,7 @@
                 </option>
                 <option>
                     <name>CCRequirePrototypes</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>CCDiagWarnAreErr</name>
@@ -649,7 +649,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state></state>
+                    <state>c.srec</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -692,7 +692,7 @@
                 <debug>1</debug>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>$PROJ_FNAME$.out</state>
+                    <state>c.out</state>
                 </option>
                 <option>
                     <name>IlinkLibIOConfig</name>
@@ -764,11 +764,11 @@
                 </option>
                 <option>
                     <name>IlinkIcfOverride</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$TOOLKIT_DIR$\config\linker\TexasInstruments\TM4C123GH6.icf</state>
+                    <state>$PROJ_DIR$\project.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -1001,7 +1001,7 @@
                 </option>
                 <option>
                     <name>IlinkTrustzoneImportLibraryOut</name>
-                    <state>Class1_import_lib.o</state>
+                    <state>project_import_lib.o</state>
                 </option>
                 <option>
                     <name>OILinkExtraOption</name>
@@ -1032,6 +1032,11 @@
         </settings>
         <settings>
             <name>BILINK</name>
+            <archiveVersion>0</archiveVersion>
+            <data />
+        </settings>
+        <settings>
+            <name>Coder</name>
             <archiveVersion>0</archiveVersion>
             <data />
         </settings>
@@ -1067,11 +1072,11 @@
                 </option>
                 <option>
                     <name>Input description</name>
-                    <state></state>
+                    <state>Full formatting.</state>
                 </option>
                 <option>
                     <name>Output description</name>
-                    <state></state>
+                    <state>Full formatting.</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -1093,7 +1098,7 @@
                 </option>
                 <option>
                     <name>RTDescription</name>
-                    <state></state>
+                    <state>Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod.</state>
                 </option>
                 <option>
                     <name>OGProductVersion</name>
@@ -1101,7 +1106,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>7.50.2.0</state>
+                    <state>7.40.3.8937</state>
                 </option>
                 <option>
                     <name>GeneralEnableMisra</name>
@@ -1113,7 +1118,7 @@
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
-                    <state></state>
+                    <state>default	None</state>
                 </option>
                 <option>
                     <name>GenLowLevelInterface</name>
@@ -1147,12 +1152,12 @@
                 </option>
                 <option>
                     <name>RTConfigPath2</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Normal.h</state>
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
                     <version>27</version>
-                    <state>38</state>
+                    <state>34</state>
                 </option>
                 <option>
                     <name>OGUseCmsis</name>
@@ -1169,11 +1174,11 @@
                 <option>
                     <name>CoreVariant</name>
                     <version>27</version>
-                    <state>38</state>
+                    <state>34</state>
                 </option>
                 <option>
                     <name>GFPUDeviceSlave</name>
-                    <state></state>
+                    <state>default	None</state>
                 </option>
                 <option>
                     <name>FPU2</name>
@@ -1192,7 +1197,7 @@
                 <option>
                     <name>GFPUCoreSlave2</name>
                     <version>27</version>
-                    <state>38</state>
+                    <state>34</state>
                 </option>
                 <option>
                     <name>OGCMSISPackSelectDevice</name>
@@ -1368,7 +1373,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state></state>
+                    <state>$FILE_BNAME$.o</state>
                 </option>
                 <option>
                     <name>CCLibConfigHeader</name>
@@ -1634,7 +1639,7 @@
                 </option>
                 <option>
                     <name>AOutputFile</name>
-                    <state></state>
+                    <state>$FILE_BNAME$.o</state>
                 </option>
                 <option>
                     <name>ALimitErrorsCheck</name>
@@ -1684,7 +1689,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state></state>
+                    <state>c.srec</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -1727,7 +1732,7 @@
                 <debug>0</debug>
                 <option>
                     <name>IlinkOutputFile</name>
-                    <state>$PROJ_FNAME$.out</state>
+                    <state>c.out</state>
                 </option>
                 <option>
                     <name>IlinkLibIOConfig</name>
@@ -1775,7 +1780,7 @@
                 </option>
                 <option>
                     <name>IlinkMapFile</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>IlinkLogFile</name>
@@ -1803,7 +1808,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state></state>
+                    <state>$TOOLKIT_DIR$\CONFIG\generic.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -2070,11 +2075,19 @@
             <archiveVersion>0</archiveVersion>
             <data />
         </settings>
+        <settings>
+            <name>Coder</name>
+            <archiveVersion>0</archiveVersion>
+            <data />
+        </settings>
     </configuration>
+    <file>
+        <name>$PROJ_DIR$\delay.c</name>
+    </file>
     <file>
         <name>$PROJ_DIR$\main.c</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\tm4c123gh6pm.h</name>
+        <name>$PROJ_DIR$\tm4c_cmsis.h</name>
     </file>
 </project>
