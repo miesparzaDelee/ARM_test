@@ -1,0 +1,30 @@
+[
+  {
+    "ID": "c:@F@main",
+    "What": "Function",
+    "defdec": "Def",
+    "display": "int main(void)",
+    "location": {
+      "column": "5",
+      "line": "2",
+      "path": "C:\\Users\\miesp\\Documents\\GitHub\\ARM_test\\Tiva\\IAR_test\\Class4\\main.c"
+    },
+    "name": "main",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:main.c@346@F@main@counter",
+    "What": "Variable",
+    "defdec": "Def",
+    "display": "counter",
+    "location": {
+      "column": "13",
+      "line": "10",
+      "path": "C:\\Users\\miesp\\Documents\\GitHub\\ARM_test\\Tiva\\IAR_test\\Class4\\main.c"
+    },
+    "name": "counter",
+    "origin": "project_file",
+    "scope": null
+  }
+]
