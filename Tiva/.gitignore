@@ -15,4 +15,13 @@
 **/Obj/*.pbd  
 **/Obj/*.pbd.*  
 **/Obj/*.pbi  
-**/Obj/*.pbi.*  
+**/Obj/*.pbi.*
+
+# CCS
+**/Release/*
+**/.xdchelp
+**/config/*
+**/.launches/*
+**/.jxbrowser-data/* 
+
+
