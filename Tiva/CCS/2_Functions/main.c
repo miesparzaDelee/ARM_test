@@ -1,8 +1,4 @@
 
-
-/**
- * main.c
- */
 #include <stdint.h>
 #include "inc/tm4c123gh6pm.h"
 #include "delay.h"
@@ -19,10 +15,8 @@ int main(void)
     //*((unsigned int *)0x40025400U) = 0x0EU; // Set direction (GPIODIR Input or Output)
     GPIO_PORTF_DEN_R = 0x0EU;
        //*((unsigned int *)0x4002551CU) = 0x0EU; // Set as digital (GPIODEN
-
        while (1) {
            GPIO_PORTF_DATA_BITS_R[LED_WHITE] = LED_RED;
-
            delay();
 
            GPIO_PORTF_DATA_BITS_R[LED_WHITE] = LED_BLUE;
@@ -35,3 +29,4 @@ int main(void)
            delay();
        }
 }
+
