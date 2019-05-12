@@ -9,8 +9,6 @@
 #define LED_GREEN (1U<<3)
 #define LED_WHITE LED_RED|LED_BLUE|LED_GREEN
 
-
-
 int main(void)
 {
     SYSCTL -> RCGCGPIO = (1U<<5); // Enable Clock Gating for the port //page 340
@@ -32,5 +30,5 @@ int main(void)
 }
 
 void SysTick_Handler(void){
-    GPIOF->DATA_Bits[LED_WHITE] ^= LED_WHITE;
+    GPIOF->DATA_Bits[LED_WHITE] ^= LED_BLUE;
 }
