@@ -8,6 +8,13 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+#include "inc/tm4c123gh6pm.h"
+
+#define LED_RED (1U<<1)
+#define LED_BLUE (1U<<2)
+#define LED_GREEN (1U<<3)
+#define LED_WHITE LED_RED|LED_BLUE|LED_GREEN
+
 #ifndef RC_PRIVATE_BUFFER_LENGTH
 #define RC_PRIVATE_BUFFER_LENGTH 200
 #endif
@@ -24,10 +31,10 @@
 #include "driverlib/uart.h"
 #include "driverlib/interrupt.h"
 
-volatile uint32_t RC_POINTER_BUFFER;
-volatile uint8_t NEXTION_COMMAND_SIZE;
-volatile uint8_t RC_PRIVATE_BUFFER[RC_PRIVATE_BUFFER_LENGTH];
-volatile uint8_t NEXTION_COMMAND_ARGS[10];
+volatile int RC_POINTER_BUFFER;
+volatile int NEXTION_COMMAND_SIZE;
+volatile int RC_PRIVATE_BUFFER[RC_PRIVATE_BUFFER_LENGTH];
+volatile int NEXTION_COMMAND_ARGS[10];
 
 #define InvalidInstruction               0x00
 #define InstructionSuccessful            0x01
@@ -63,12 +70,11 @@ volatile uint8_t NEXTION_COMMAND_ARGS[10];
 #define TransparentDataReady             0xFE
 
 
-void EUSART_Init(void);
 void Nextion_Init(void);
-void EUSART_Recive_Tasks(void);
-bool Nextion_FirstByteValidation(uint8_t Byte);
-uint8_t IsNextionCommandValid(uint8_t Buff_pos);
-void Nextion_CallBack_Handler(uint8_t CallBackType);
+void Nextion_Recive_Tasks(void);
+bool Nextion_FirstByteValidation(int Byte);
+int IsNextionCommandValid(int Buff_pos);
+void Nextion_CallBack_Handler(int CallBackType);
 
 //Delee libraries
 typedef enum {

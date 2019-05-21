@@ -28,8 +28,6 @@
 volatile uint32_t data1;
 
 
-
-
 int
 main(void)
 {
@@ -39,106 +37,110 @@ main(void)
     SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ |
                        SYSCTL_OSC_MAIN);
 
-    //
-    // Enable the GPIO port that is used for the on-board LED.
-    //
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 
-    //
-    // Enable the GPIO pins for the LED (PF2 & PF3).
-    //
-    GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_2);
+    GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, LED_WHITE);
 
-    //
-    // Initialize the UART.
-    EUSART_Init();
+    // Initialize the Nextion.
+    Nextion_Init();
 
     while(1)
     {
-
+      Nextion_Receive_Main_Tasks();
     }
 }
 
-void UART0_IRQHandler(void){
-    EUSART_Recive_Tasks();
+void UART1_IRQHandler(void){
+    Nextion_Recive_Tasks();
 }
 
-void Nextion_Init(void) {
-    EUSART_Init();
-//    if (Nextion_Comm_OK()){
-//        NEXTION_STATUS=IDDLE;
-//        EUSART_Init(nex_mode,nex_mode,BaudRate);
-//    }else{
-//        NEXTION_STATUS=COMMUNICATIONS_ERROR;
-//    }
-}
 
-void EUSART_Init(void){
+void Nextion_Init(void)
+{
 
-SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART1);
 
 // Configure GPIO Pins for UART mode.
-GPIOPinConfigure(GPIO_PA0_U0RX);
-GPIOPinConfigure(GPIO_PA1_U0TX);
-GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+    GPIOPinConfigure(GPIO_PB0_U1RX);
+    GPIOPinConfigure(GPIO_PB1_U1TX);
+    GPIOPinTypeUART(GPIO_PORTB_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
 // Use the internal 16MHz oscillator as the UART clock source.
-UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
+    UARTClockSourceSet(UART1_BASE, UART_CLOCK_PIOSC);
 //Initialize USART
-UARTConfigSetExpClk(UART0_BASE, 16000000, 115200,
-                          (UART_CONFIG_PAR_NONE | UART_CONFIG_STOP_ONE |
-                           UART_CONFIG_WLEN_8));
+    UARTConfigSetExpClk(UART1_BASE, 16000000, 115200,
+                        (UART_CONFIG_PAR_NONE | UART_CONFIG_STOP_ONE |
+                        UART_CONFIG_WLEN_8));
 //Configure the FIFO registers
-UARTFIFOEnable(UART0_BASE);
-UARTFIFOLevelSet(UART0_BASE, UART_FIFO_TX1_8, UART_FIFO_RX1_8);
+    UARTFIFOEnable(UART1_BASE);
+    UARTFIFOLevelSet(UART1_BASE, UART_FIFO_TX2_8, UART_FIFO_RX2_8);
 
 // Set the UART to interrupt when half FIFO is ready.
-UARTIntClear(UART0_BASE,0xFFFFFFFF);
-UARTIntEnable(UART0_BASE, UART_INT_RX);
-IntEnable(INT_UART0);
+    UARTIntClear(UART1_BASE, 0xFFFFFFFF);
+    UARTIntEnable(UART1_BASE, UART_INT_RX);
+    IntEnable(INT_UART1);
 
 // Enable the UART operation.
- UARTEnable(UART0_BASE);
- RC_POINTER_BUFFER=0;
- }
-
-void EUSART_Recive_Tasks(void) {
-             while(UARTCharsAvail(UART0_BASE)){
-             RC_PRIVATE_BUFFER[RC_POINTER_BUFFER]=UARTCharGetNonBlocking(UART0_BASE);
-             RC_POINTER_BUFFER++;
-             }
+    UARTEnable(UART1_BASE);
+    RC_POINTER_BUFFER = 0;
 }
 
-void Nextion_Receive_Main_Tasks() {
-    uint8_t counter = 0;
-    uint8_t i;
-    if(RC_POINTER_BUFFER != 0){
-    while (RC_POINTER_BUFFER != counter) {
-        if (Nextion_FirstByteValidation(RC_PRIVATE_BUFFER[counter])) {
-            switch(IsNextionCommandValid(counter)){
+void Nextion_Recive_Tasks(void)
+{
+    while (UARTCharsAvail(UART1_BASE))
+    {
+        RC_PRIVATE_BUFFER[RC_POINTER_BUFFER] = UARTCharGetNonBlocking(
+                UART1_BASE);
+        RC_POINTER_BUFFER++;
+    }
+}
+
+void Nextion_Receive_Main_Tasks(void)
+{
+    int counter = 0;
+    int i;
+    if (RC_POINTER_BUFFER != 0)
+    {
+        while (RC_POINTER_BUFFER != counter)
+        {
+            if (Nextion_FirstByteValidation(RC_PRIVATE_BUFFER[counter]))
+            {
+                switch (IsNextionCommandValid(counter))
+                {
                 case 0:
                     counter++;
                     break;
                 case 1:
-                    for (i=1;i < NEXTION_COMMAND_SIZE-3;i++){
-                       NEXTION_COMMAND_ARGS[i-1]=RC_PRIVATE_BUFFER[counter+i];
+                    for (i = 1; i < NEXTION_COMMAND_SIZE - 3; i++)
+                    {
+                        NEXTION_COMMAND_ARGS[i - 1] = RC_PRIVATE_BUFFER[counter
+                                + i];
                     }
                     Nextion_CallBack_Handler(RC_PRIVATE_BUFFER[counter]);
                     counter = counter + NEXTION_COMMAND_SIZE;
                     break;
                 case 2:
+                    while (UARTCharsAvail(UART1_BASE))
+                    {
+                        RC_PRIVATE_BUFFER[RC_POINTER_BUFFER] =
+                                UARTCharGetNonBlocking(
+                                UART1_BASE);
+                        RC_POINTER_BUFFER++;
+                    }
                     return;
+                }
             }
-        } else {
-            counter++;
+            else
+            {
+                counter++;
+            }
         }
+        RC_POINTER_BUFFER = 0;
     }
-    RC_POINTER_BUFFER=0;
-}
 }
 
-bool Nextion_FirstByteValidation(uint8_t Byte) {
+bool Nextion_FirstByteValidation(int Byte) {
     switch(Byte) {
         case InvalidInstruction:
             NEXTION_COMMAND_SIZE=4;
@@ -233,8 +235,8 @@ bool Nextion_FirstByteValidation(uint8_t Byte) {
     }
 }
 
-uint8_t IsNextionCommandValid(uint8_t Buff_pos) {
-    if (!(RC_POINTER_BUFFER < NEXTION_COMMAND_SIZE)) {
+int IsNextionCommandValid(int Buff_pos) {
+    if (!(RC_POINTER_BUFFER < (NEXTION_COMMAND_SIZE))) {
         if ((0xFFFFFF == RC_PRIVATE_BUFFER[Buff_pos + NEXTION_COMMAND_SIZE-1]) | (RC_PRIVATE_BUFFER[Buff_pos + NEXTION_COMMAND_SIZE - 2] << 8) | (RC_PRIVATE_BUFFER[Buff_pos + NEXTION_COMMAND_SIZE - 2] << 16)) {
             return 1; //Valid Command
         }
@@ -244,13 +246,14 @@ uint8_t IsNextionCommandValid(uint8_t Buff_pos) {
     return 0;//Invalid Command
 }
 
-void Nextion_CallBack_Handler(uint8_t CallBackType) {
+void Nextion_CallBack_Handler(int CallBackType) {
     switch (CallBackType) {
         case TouchEvent:
-           break;
+           GPIO_PORTF_DATA_BITS_R[LED_WHITE] ^= LED_WHITE;
+           return;
         case CurrentPageNumber:
-           break;
+           return;
          default:
-           break;
+           return;
     }
 }
