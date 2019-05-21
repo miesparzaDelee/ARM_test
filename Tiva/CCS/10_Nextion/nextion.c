@@ -84,17 +84,75 @@ void Nextion_Init(void)
 // Enable the UART operation.
     UARTEnable(UART1_BASE);
     RC_POINTER_BUFFER = 0;
+    TX_POINTER_BUFFER = 0;
+    TX_ACTUAL_WRITE = 0;
 }
 
 void Nextion_Recive_Tasks(void)
 {
+     // if (TXIF) {
     while (UARTCharsAvail(UART1_BASE))
     {
         RC_PRIVATE_BUFFER[RC_POINTER_BUFFER] = UARTCharGetNonBlocking(
                 UART1_BASE);
         RC_POINTER_BUFFER++;
     }
+        // }
 }
+
+void EUSART_Transmit_Tasks(void)
+{
+    // if (TXIF) {
+    if (TX_POINTER_BUFFER > 0)
+    {
+
+        if (UARTCharPutNonBlocking(UART1_BASE,
+                                   TX_PRIVATE_BUFFER[TX_ACTUAL_WRITE]))
+        {
+            TX_ACTUAL_WRITE++;
+        }
+    }
+    if (TX_POINTER_BUFFER == TX_ACTUAL_WRITE)
+    {
+        //PIE1bits.TXIE = 0; // Disable interrupts
+        TX_POINTER_BUFFER = 0;
+        TX_ACTUAL_WRITE = 0;
+    }
+    // }
+}
+
+bool EUSART_Transmit_Buffer(uint8_t *Buffer, int max)
+{
+    //Basic Transmition
+    bool SaveInt;
+    int count = 0;
+    while (count < max)
+    {
+        if (EUSART_Transmit_Byte(*Buffer) != true)
+            return false;
+        Buffer++;
+        count++;
+
+    }
+    return true;
+}
+
+bool EUSART_Transmit_Byte(uint8_t Character)
+{
+    if (TX_POINTER_BUFFER < TX_PRIVATE_BUFFER_LENGTH)
+    {
+        TX_PRIVATE_BUFFER[TX_POINTER_BUFFER] = Character;
+        TX_POINTER_BUFFER++;
+        // PIE1bits.TXIE=1; Enable Interrupt
+
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 
 void Nextion_Receive_Main_Tasks(void)
 {

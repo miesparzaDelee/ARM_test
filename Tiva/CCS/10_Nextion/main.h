@@ -9,16 +9,6 @@
 #define MAIN_H_
 
 #include "inc/tm4c123gh6pm.h"
-
-#define LED_RED (1U<<1)
-#define LED_BLUE (1U<<2)
-#define LED_GREEN (1U<<3)
-#define LED_WHITE LED_RED|LED_BLUE|LED_GREEN
-
-#ifndef RC_PRIVATE_BUFFER_LENGTH
-#define RC_PRIVATE_BUFFER_LENGTH 200
-#endif
-
 #include <stdint.h>
 #include <stdbool.h>
 #include "driverlib/rom_map.h"
@@ -31,10 +21,29 @@
 #include "driverlib/uart.h"
 #include "driverlib/interrupt.h"
 
+#define LED_RED (1U<<1)
+#define LED_BLUE (1U<<2)
+#define LED_GREEN (1U<<3)
+#define LED_WHITE LED_RED|LED_BLUE|LED_GREEN
+
+#ifndef RC_PRIVATE_BUFFER_LENGTH
+#define RC_PRIVATE_BUFFER_LENGTH 200
+#endif
+
+#ifndef TX_PRIVATE_BUFFER_LENGTH
+#define TX_PRIVATE_BUFFER_LENGTH 200
+#endif
+
 volatile int RC_POINTER_BUFFER;
 volatile int NEXTION_COMMAND_SIZE;
 volatile int RC_PRIVATE_BUFFER[RC_PRIVATE_BUFFER_LENGTH];
 volatile int NEXTION_COMMAND_ARGS[10];
+
+volatile int TX_POINTER_BUFFER;
+volatile int  TX_ACTUAL_WRITE;
+volatile uint8_t TextValue[10];
+volatile uint8_t CommandString[30];
+volatile uint8_t TX_PRIVATE_BUFFER[TX_PRIVATE_BUFFER_LENGTH];
 
 #define InvalidInstruction               0x00
 #define InstructionSuccessful            0x01
@@ -75,6 +84,9 @@ void Nextion_Recive_Tasks(void);
 bool Nextion_FirstByteValidation(int Byte);
 int IsNextionCommandValid(int Buff_pos);
 void Nextion_CallBack_Handler(int CallBackType);
+bool EUSART_Transmit_Buffer(uint8_t *Buffer, int max);
+void EUSART_Transmit_Tasks(void);
+bool EUSART_Transmit_Byte(uint8_t Character);
 
 //Delee libraries
 typedef enum {
