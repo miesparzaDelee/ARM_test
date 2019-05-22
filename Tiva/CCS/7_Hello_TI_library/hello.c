@@ -24,21 +24,15 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "driverlib/rom_map.h"
-#include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
-#include "driverlib/fpu.h"
+//#include "driverlib/fpu.h"
 #include "driverlib/gpio.h"
 #include "driverlib/pin_map.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
+#include "utils/uartstdio.h"
 
-
-volatile uint32_t data1;
-
-
-void EUSART_Init(void);
 //*****************************************************************************
 //
 //! \addtogroup example_list
@@ -57,10 +51,49 @@ void EUSART_Init(void);
 // The error routine that is called if the driver library encounters an error.
 //
 //*****************************************************************************
+#ifdef DEBUG
+void
+__error__(char *pcFilename, uint32_t ui32Line)
+{
+}
+#endif
+
 //*****************************************************************************
 //
 // Configure the UART and its pins.  This must be called before UARTprintf().
 //
+//*****************************************************************************
+void
+ConfigureUART(void)
+{
+    //
+    // Enable the GPIO Peripheral used by the UART.
+    //
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+
+    //
+    // Enable UART0
+    //
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+
+    //
+    // Configure GPIO Pins for UART mode.
+    //
+    GPIOPinConfigure(GPIO_PA0_U0RX);
+    GPIOPinConfigure(GPIO_PA1_U0TX);
+    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+
+    //
+    // Use the internal 16MHz oscillator as the UART clock source.
+    //
+    UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
+
+    //
+    // Initialize the UART for console I/O.
+    //
+    UARTStdioConfig(0, 115200, 16000000);
+}
+
 //*****************************************************************************
 //
 // Print "Hello World!" to the UART on the evaluation board.
@@ -76,6 +109,7 @@ main(void)
     // instructions to be used within interrupt handlers, but at the expense of
     // extra stack usage.
     //
+    FPULazyStackingEnable();
 
     //
     // Set the clocking to run directly from the crystal.
@@ -95,11 +129,16 @@ main(void)
 
     //
     // Initialize the UART.
-    EUSART_Init();
-    //ConfigureUART();
+    //
+    ConfigureUART();
 
-    UARTEnable(UART0_BASE);
+    //
+    // Hello!
+    //
+    UARTprintf("Hello, world!\n");
 
+    //
+    // We are finished.  Hang around doing nothing.
     //
     while(1)
     {
@@ -122,54 +161,5 @@ main(void)
         // Delay for a bit.
         //
         SysCtlDelay(SysCtlClockGet() / 10 / 3);
-        while(UARTCharsAvail(UART0_BASE)){
-           UARTCharPut(UART0_BASE,UARTCharGetNonBlocking(UART0_BASE));
-           }
     }
 }
-
-void UART0_IRQHandler(void){
-    UARTIntClear(UART0_BASE,
-                 UART_INT_RX);
-
-}
-
-//void Nextion_Init(DEV_OPERATION_MODE nex_mode, BAUD_SPEED BaudRate) {
-//    delay_ms(400);
-//    EUSART_Init(POLLING,POLLING,BaudRate);
-//    if (Nextion_Comm_OK()){
-//        NEXTION_STATUS=IDDLE;
-//        EUSART_Init(nex_mode,nex_mode,BaudRate);
-//    }else{
-//        NEXTION_STATUS=COMMUNICATIONS_ERROR;
-//    }
-//}
-
-void EUSART_Init(void){
-
-SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-
-// Configure GPIO Pins for UART mode.
-GPIOPinConfigure(GPIO_PA0_U0RX);
-GPIOPinConfigure(GPIO_PA1_U0TX);
-GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-
-// Use the internal 16MHz oscillator as the UART clock source.
-UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
-//Initialize USART
-UARTConfigSetExpClk(UART0_BASE, 16000000, 115200,
-                          (UART_CONFIG_PAR_NONE | UART_CONFIG_STOP_ONE |
-                           UART_CONFIG_WLEN_8));
-//Configure the FIFO registers
-UARTFIFOEnable(UART0_BASE);
-UARTFIFOLevelSet(UART0_BASE, UART_FIFO_TX4_8, UART_FIFO_RX4_8);
-
-// Set the UART to interrupt when half FIFO is ready.
-UARTIntClear(UART0_BASE,0xFFFFFFFF);
-UARTIntEnable(UART0_BASE, UART_INT_RX);
-IntEnable(INT_UART0);
-
-// Enable the UART operation.
- UARTEnable(UART0_BASE);
- }
