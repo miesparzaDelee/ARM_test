@@ -24,4 +24,16 @@
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Nextion.c</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/Delee/Nextion.c</locationURI>
+		</link>
+		<link>
+			<name>Nextion.h</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/Delee/Nextion.h</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
