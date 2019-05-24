@@ -28,12 +28,12 @@
 		<link>
 			<name>Nextion.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/Delee/Nextion.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/TIVA_C/Delee/Nextion.c</locationURI>
 		</link>
 		<link>
 			<name>Nextion.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/Delee/Nextion.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/TIVA_C/Delee/Nextion.h</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

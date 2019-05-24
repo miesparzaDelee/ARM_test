@@ -10,4 +10,5 @@
 	<createSlaveProjects value=""/>
 	<origin value="C:/ti/TivaWare_C_Series-2.1.4.178/examples/boards/ek-tm4c123gxl/usb_dev_bulk/ccs"/>
 	<isTargetManual value="false"/>
+	<connection value="common/targetdb/connections/Stellaris_ICDI_Connection.xml"/>
 </projectOptions>

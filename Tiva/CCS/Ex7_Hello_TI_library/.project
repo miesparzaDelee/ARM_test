@@ -28,12 +28,7 @@
 		<link>
 			<name>uartstdio.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/utils/uartstdio.c</locationURI>
-		</link>
-		<link>
-			<name>uartstdio.h</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/utils/uartstdio.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/TIVA_C/utils/uartstdio.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

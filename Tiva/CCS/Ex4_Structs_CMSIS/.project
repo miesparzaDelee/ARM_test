@@ -28,7 +28,7 @@
 		<link>
 			<name>TM4C123GH6PM.h</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/CMSIS/TM4C123GH6PM.h</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/TIVA_C/CMSIS/TM4C123GH6PM.h</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

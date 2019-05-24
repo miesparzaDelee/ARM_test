@@ -28,7 +28,7 @@
 		<link>
 			<name>Delee_Libraries/usbdDelee.c</name>
 			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/Delee/usbdDelee.c</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/LIB_ARM/TIVA_C/Delee/usbdDelee.c</locationURI>
 		</link>
 		<link>
 			<name>utils/uartstdio.c</name>
