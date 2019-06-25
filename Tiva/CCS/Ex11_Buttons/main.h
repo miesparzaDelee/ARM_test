@@ -18,10 +18,12 @@
 
 void Main_Init(void);
 
+#define SW_1    1U
 #define LED_RED (1U<<1)
 #define LED_BLUE (1U<<2)
 #define LED_GREEN (1U<<3)
 #define LED_WHITE LED_RED|LED_BLUE|LED_GREEN
+#define SW_2    (1U<<4)
 
 
 #endif /* MAIN_H_ */

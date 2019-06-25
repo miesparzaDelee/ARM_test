@@ -8,20 +8,13 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-// PIN_ASIGMENTS AND SO
-#include <stdbool.h>
-#include <stdint.h>
-#include "inc/hw_memmap.h"
-#include "driverlib/gpio.h"
-#include "driverlib/pin_map.h"
-#include "driverlib/sysctl.h"
-#include "driverlib/rom.h"
+
+//#define LOADCELL_SPEED
+#define LOADCELL_DOUT GPIO_PIN_5 //INPUT
+#define LOADCELL_CLK GPIO_PIN_6 //OUTPUT
+#include "Delee/LoadCell.h"
 
 
-volatile bool USB_DELEE_RX_EVENT_F;
-volatile bool USB_DELEE_CONFIGURED_F;
-uint32_t USB_TX_EVENT_COUNT;
-uint32_t USB_RX_EVENT_COUNT;
 // USB DELEE LIBRARY
 #define DELEE_USB_BUFFER_SIZE 256
 #define DELEE_VID 0xd1ee
@@ -33,8 +26,6 @@ uint32_t USB_RX_EVENT_COUNT;
 //UART 0 DEBUG
 #include "utils/uartstdio.h"
 #include "driverlib/uart.h"
-
-
 
 
 

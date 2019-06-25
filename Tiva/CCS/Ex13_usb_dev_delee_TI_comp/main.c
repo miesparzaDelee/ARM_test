@@ -100,28 +100,16 @@ main(void)
     UARTprintf("Waiting for host...\n");
 
     //
-    bool USB_Connected=true;
-    int ii;
+    uint32_t delay=0;
     while(1)
-    {
-       if (USB_DELEE_CONFIGURED_F == USB_Connected){
-           USB_Connected = !USB_Connected;
-           if (USB_DELEE_CONFIGURED_F){
-           UARTprintf("Connected to  host...\n");
-           }else{
-           UARTprintf("Disconnected...\n");
-           }
+    {  delay=0;
+        if(USB_DELEE_RX_EVENT_F==1){
+            USB_DELEE_RX_EVENT_F=0;
+            USB_RX_EVENT_COUNT++;
+            UARTprintf("Cuenta %d",USB_RX_EVENT_COUNT);
+            while(delay<100000){
+                delay++;
+            }
         }
-
-       if (USB_DELEE_RX_EVENT_F){
-           USB_DELEE_RX_EVENT_F=false;
-           UARTprintf("Data %d Received...\n",USB_RX_EVENT_COUNT);
-           for(ii=0;ii<64;ii++)
-           {
-               UARTprintf("Data[%d]: %d \n",ii, g_pui8USBRxBuffer[ii]);
-               g_pui8USBTxBuffer[ii]=g_pui8USBRxBuffer[ii];
-           }
-           USBBufferDataWritten(&g_sTxBuffer, 64);
-       }
     }
 }
