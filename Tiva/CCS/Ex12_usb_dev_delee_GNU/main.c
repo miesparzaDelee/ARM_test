@@ -87,48 +87,38 @@ main(void)
     //
     ConfigureUART();
 
-    UARTprintf("\033[2JTiva C Series USB bulk device example\n");
+    UARTprintf(" Tiva C USB Delee device example\n");
     UARTprintf("---------------------------------\n\n");
-
+    //
+    // Open UART0 and show the application name on the UART.
+    //
     USB_Delee_Init();
     UARTprintf("Configuring USB\n");
-
-       //
-    // Wait for initial configuration to complete.
-    //
-    UARTprintf("Waiting for host...\n");
-
-    //
-    bool USB_Connected=true;
-    int ii;
+    bool usb_previous = ~USB_CONNECTED;
     while(1)
     {
-       if (USB_DELEE_CONFIGURED_F == USB_Connected){
-           USB_Connected = !USB_Connected;
-           if (USB_DELEE_CONFIGURED_F){
-           UARTprintf("Connected to  host...\n");
-           }else{
-           UARTprintf("Disconnected...\n");
-           }
-        }
 
-       if (USB_DELEE_RX_EVENT_F){
-           USB_DELEE_RX_EVENT_F=false;
-           UARTprintf("Data %d Received...\n",USB_RX_EVENT_COUNT);
-           for(ii=0;ii<64;ii++)
-           {
-               UARTprintf("Data[%d]: %d \n",ii, g_pui8USBRxBuffer[ii]);
-               g_pui8USBTxBuffer[ii]=g_pui8USBRxBuffer[ii];
-           }
-           USBBufferDataWritten(&g_sTxBuffer, 64);
-       }
+        USB_Delee_Main_Tasks();
+        if (usb_previous != USB_CONNECTED){
+        if(USB_CONNECTED){
+
+            UARTprintf("USB_Connected...\n");
+                }else{
+                    UARTprintf("USB_Disonnected...\n");
+                }
+        }
+        usb_previous=USB_CONNECTED;
     }
+    }
+
+
+void USB_Delee_Command_CallBack(uint16_t Command, uint8_t Instance){
+
 }
 
 void UART0_IRQHandler(void){
-  //  UARTStdioIntHandler();
+   // UARTStdioIntHandler();
 }
-
-void USB0_IRQHandler(void){
-    USB0DeviceIntHandler();
-}
+ void USB0_IRQHandler(void){
+     USB0DeviceIntHandler();
+ }

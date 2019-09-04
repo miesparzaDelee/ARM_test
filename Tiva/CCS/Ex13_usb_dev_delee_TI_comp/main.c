@@ -75,7 +75,6 @@ ConfigureUART(void)
 int
 main(void)
 {
-    volatile uint32_t ui32Loop;
 
     //
     // Set the clocking to run from the PLL at 50MHz
@@ -88,28 +87,31 @@ main(void)
     //
     ConfigureUART();
 
-    UARTprintf("\033[2JTiva C Series USB bulk device example\n");
+    UARTprintf(" Tiva C USB Delee device example\n");
     UARTprintf("---------------------------------\n\n");
-
+    //
+    // Open UART0 and show the application name on the UART.
+    //
     USB_Delee_Init();
     UARTprintf("Configuring USB\n");
-
-       //
-    // Wait for initial configuration to complete.
-    //
-    UARTprintf("Waiting for host...\n");
-
-    //
-    uint32_t delay=0;
+    bool usb_previous = ~USB_CONNECTED;
     while(1)
-    {  delay=0;
-        if(USB_DELEE_RX_EVENT_F==1){
-            USB_DELEE_RX_EVENT_F=0;
-            USB_RX_EVENT_COUNT++;
-            UARTprintf("Cuenta %d",USB_RX_EVENT_COUNT);
-            while(delay<100000){
-                delay++;
-            }
+    {
+
+        USB_Delee_Main_Tasks();
+        if (usb_previous != USB_CONNECTED){
+        if(USB_CONNECTED){
+
+            UARTprintf("USB_Connected...\n");
+                }else{
+                    UARTprintf("USB_Disonnected...\n");
+                }
         }
+        usb_previous=USB_CONNECTED;
     }
+    }
+
+
+void USB_Delee_Command_CallBack(uint16_t Command, uint8_t Instance){
+
 }

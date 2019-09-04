@@ -254,7 +254,7 @@ int const g_pfnVectors[] = {
     (int)&CAN2_IRQHandler,        /* CAN2                            */
     0,                            /* Reserved                        */
     (int)&Hibernate_IRQHandler,   /* Hibernate                       */
-    (int)&USB0_IRQHandler,        /* USB0                            */
+    (int)&USB0DeviceIntHandler,        /* USB0                            */
     (int)&PWMGen3_IRQHandler,     /* PWM Generator 3                 */
     (int)&uDMAST_IRQHandler,      /* uDMA Software Transfer          */
     (int)&uDMAError_IRQHandler,   /* uDMA Error                      */
